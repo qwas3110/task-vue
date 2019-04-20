@@ -59,7 +59,9 @@
             </div>
         </div>
     </div>
-
+    <audio id="alert-sound">
+        <source src="./sound/BlankSpace.mp3">
+    </audio>
     <template id="task-tpl">
         <div class="item">
             <button @click="action('toggle_complete',todo.id)">完成</button>

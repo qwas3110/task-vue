@@ -3,6 +3,8 @@
 
     var Event = new Vue();
 
+    var alert_sound = document.getElementById('alert-sound');
+
     function copy(obj) {
         return Object.assign({}, obj);
     }
@@ -26,7 +28,14 @@
         },
 
         mounted: function() {
+            var me = this;
             this.list = ms.get('list') || this.list;
+
+
+            setInterval(function () {
+                me.check_alerts();
+            },1000);
+
             Event.$on('remove', id => {
                 if (id) {
                     this.remove(id);
@@ -46,6 +55,24 @@
         },
 
         methods: {
+            // 任务提醒
+            check_alerts() {
+                var me = this;
+                this.list.forEach(function (row,i) {
+                    var alert_at = row.alert_at;
+                    if (!alert_at || row.alert_confirmed) return;
+
+                    var alert_at = (new Date(alert_at)).getTime();
+                    var now = (new Date()).getTime();
+
+                    if (now >= alert_at) {
+                        alert_sound.play();
+                        var confirmed = confirm(row.title);
+                        Vue.set(me.list[i], 'alert_confirmed', confirmed)
+                    }
+                })
+            },
+
             // 添加或更新
             merge() {
                 var is_update,id;

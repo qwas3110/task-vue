@@ -42,3 +42,7 @@ input {
     color: #555;
     font-size: 18px;
 }
+
+#alert-sound {
+    display: none;
+}
