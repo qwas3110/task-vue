@@ -31,12 +31,12 @@
 
             <div class="wrap">
                 未完成
-                <div v-if="!todo.completed" v-for="(todo,index) in list" class="item">
-                    <button @click="toggle_complete(todo.id)">完成</button>
-                    {{todo.title}}
-                    <button @click="remove(todo.id)">删除</button>
-                    <button @click="set_current(todo)">更新</button>
-                </div>
+                <task :todo="todo"
+                      v-if="!todo.completed"
+                      v-for="(todo,index) in list"
+                      :key="index"
+                    >
+                </task>
             </div>
         </div>
 
@@ -54,7 +54,14 @@
         </div>
     </div>
 
-
+    <template id="task-tpl">
+        <div class="item">
+            <button @click="toggle_complete(todo.id)">完成</button>
+            {{todo.title}}
+            <button @click="action('remove',todo.id)">删除</button>
+            <button @click="set_current(todo)">更新</button>
+        </div>
+    </template>
 
     <script src="lib/vue.js"></script>
     <script src="js/myStorage.js"></script>

@@ -1,9 +1,21 @@
 ;(function () {
     'use strict';
 
+    var Event = new Vue();
+
     function copy(obj) {
         return Object.assign({}, obj);
     }
+
+    Vue.component('task', {
+        template: '#task-tpl',
+        props: ['todo'],
+        methods: {
+          action(name,params) {
+              Event.$emit(name, params);
+          }
+        }
+    });
 
 
     new Vue({
@@ -15,6 +27,11 @@
 
         mounted: function() {
             this.list = ms.get('list') || this.list;
+            Event.$on('remove', id => {
+                if (id) {
+                    this.remove(id);
+                }
+            })
         },
 
         methods: {
