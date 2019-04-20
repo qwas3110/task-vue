@@ -31,6 +31,17 @@
                 if (id) {
                     this.remove(id);
                 }
+            });
+            Event.$on('toggle_complete', id => {
+                if (id) {
+                    this.toggle_complete(id);
+                }
+            });
+
+            Event.$on('set_current', todo => {
+                if (todo) {
+                    this.set_current(todo);
+                }
             })
         },
 

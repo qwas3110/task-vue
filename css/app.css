@@ -4,7 +4,7 @@
     position: relative;
 }
 
-input, button {
+input, button, textarea {
     border: 1px solid rgba(0,0,0,0.1);
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;

@@ -23,6 +23,12 @@
 
             <div class="wrap">
                 <input v-model="current.title" class="task-input" type="text" autocomplete="off">
+
+                <div class="detail">
+                    <textarea v-model="current.desc"></textarea>
+                    <input v-model="current.alert_at" type="datetime-local">
+                </div>
+
                 <button type="submit">Submit</button>
             </div>
         </form>
@@ -56,10 +62,10 @@
 
     <template id="task-tpl">
         <div class="item">
-            <button @click="toggle_complete(todo.id)">完成</button>
+            <button @click="action('toggle_complete',todo.id)">完成</button>
             {{todo.title}}
             <button @click="action('remove',todo.id)">删除</button>
-            <button @click="set_current(todo)">更新</button>
+            <button @click="action('set_current',todo)">更新</button>
         </div>
     </template>
 
