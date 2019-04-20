@@ -47,9 +47,15 @@
                 }
             });
 
-            Event.$on('set_current', todo => {
+            Event.$on('set_current', todo=> {
                 if (todo) {
                     this.set_current(todo);
+                }
+            });
+
+            Event.$on('toggle_detail', id => {
+                if (id) {
+                    this.toggle_detail(id);
                 }
             })
         },
@@ -122,6 +128,12 @@
 
                 Vue.set(this.list[i], 'completed', !this.list[i].completed);
 
+            },
+
+            toggle_detail(id) {
+                var index = this.find_index(id);
+
+                Vue.set(this.list[index],'show_detail', !this.list[index].show_detail)
             }
         },
 
