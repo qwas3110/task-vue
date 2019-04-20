@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="main">
-        <div class="navBar">
+        <div class="navbar">
             <h1>任务清单</h1>
         </div>
 
@@ -37,7 +37,7 @@
         <div class="task-list">
 
             <div class="wrap">
-                未完成
+                <div class="segment-title">未完成</div>
                 <task :todo="todo"
                       v-if="!todo.completed"
                       v-for="(todo,index) in list"
@@ -50,12 +50,11 @@
         <div class="task-list">
 
             <div class="wrap">
-                已完成
+                <div class="segment-title">已完成</div>
                 <div v-if="todo.completed" v-for="(todo,index) in list" class="item completed">
-                    <button @click="toggle_complete(todo.id)">完成</button>
+                    <div @click="toggle_complete(todo.id)" class="toggle-complete"></div>
                     {{todo.title}}
                     <button @click="remove(todo.id)">删除</button>
-                    <button @click="set_current(todo)">更新</button>
                 </div>
             </div>
         </div>
@@ -65,8 +64,10 @@
     </audio>
     <template id="task-tpl">
         <div class="item">
-            <button @click="action('toggle_complete',todo.id)">完成</button>
-            {{todo.title}}
+
+            <div @click="action('toggle_complete',todo.id)" class="toggle-complete"></div>
+            <span class="title">{{todo.title}}</span>
+
             <button @click="action('remove',todo.id)">删除</button>
             <button @click="action('set_current',todo)">更新</button>
             <button @click="action('toggle_detail',todo.id)">详情</button>
