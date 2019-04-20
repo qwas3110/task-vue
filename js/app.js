@@ -24,12 +24,14 @@
         el: '#main',
         data: {
             list: [],
+            last_id: 0,
             current: {}
         },
 
         mounted: function() {
             var me = this;
             this.list = ms.get('list') || this.list;
+            this.last_id = ms.get('last_id') || this.last_id;
 
 
             setInterval(function () {
@@ -94,7 +96,11 @@
                     if (!title && title !== 0) return;
 
                     var todo = copy( this.current);
-                    todo.id  = this.next_id();
+                    this.last_id++;
+                    ms.set('last_id', this.last_id);
+
+
+                    todo.id  = this.last_id;
 
                     this.list.push(todo);
                 }
