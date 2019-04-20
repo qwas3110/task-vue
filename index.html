@@ -19,20 +19,22 @@
             每天制定任务完成了吗？
         </div>
 
-        <div class="task-form">
+        <form @submit.prevent="merge" class="task-form">
 
             <div class="wrap">
-                <input class="task-input" type="text">
+                <input v-model="current.title" class="task-input" type="text" autocomplete="off">
                 <button type="submit">Submit</button>
             </div>
-        </div>
+        </form>
 
         <div class="task-list">
 
             <div class="wrap">
                 未完成
-                <div class="item">
-                    Lorem ipsum dolor sit amet
+                <div v-for="(todo,index) in list" class="item">
+                    {{todo.title}}
+                    <button @click="remove(todo.id)">删除</button>
+                    <button @click="set_current(todo)">更新</button>
                 </div>
             </div>
         </div>
